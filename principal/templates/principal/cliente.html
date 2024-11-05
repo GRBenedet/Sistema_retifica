@@ -1,0 +1,15 @@
+{% extends "principal/base.html" %}
+
+
+{% block content %}
+
+<ul>
+
+    {% for cliente in cliente %}
+        <li>{{ cliente }}</li>
+    {% empty %}
+        <li>Não a dados salvos</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
