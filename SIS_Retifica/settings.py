@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'SIS_Retifica.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sis_Retifica',
+        'NAME': 'banco_retifica',
         'USER': 'Giovanniadmin',
         'PASSWORD': 'Gf@07052002',
         'HOST': 'localhost',

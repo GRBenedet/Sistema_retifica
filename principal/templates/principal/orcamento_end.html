@@ -5,8 +5,8 @@
 
 <ul>
 
-    {% for cliente in cliente %}
-        <li>{{ cliente }} {{ cliente.cpfcnpj }} {{ cliente.tel }} {{ cliente.data_cadastro | date:"d/m/Y" }}</li>
+    {% for orcamento_end in orc_end %}
+        <li>{{ orcamento_end }}</li>
     {% empty %}
         <li>Não a dados salvos</li>
     {% endfor %}
