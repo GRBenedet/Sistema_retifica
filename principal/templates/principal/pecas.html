@@ -6,10 +6,25 @@
 <ul>
 
     {% for peca in peca %}
-        <li>{{ peca.cod }} {{ peca.nome }} {{ peca.med }}  {{ peca.valor }} {{ peca.data | date:"d/m/Y" }} </li>
+        <li>{{ peca.cod }} {{ peca.nome }} {{ peca.med }}  {{ peca.valor }} {{ peca.data | date:"d/m/Y" }}
+            {% for motor in peca.aplic.all %}
+                {{ motor.nomemotor }}
+        
+
+            {% empty %}
+                <li>Não a aplicações</li>
+
+            {% endfor %}
+            <a href="{% url 'edit_peca' peca.id %}">editar cliente</a>
+            <a href="{% url 'del_peca' peca.id %}">Excluir</a>    
+        </li>
+            
     {% empty %}
         <li>Não a dados salvos</li>
+
     {% endfor %}
 </ul>
+
+<a href="{% url 'nova_peca' %}">Cadastrar nova peça</a>
 
 {% endblock content %}

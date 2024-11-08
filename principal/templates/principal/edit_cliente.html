@@ -1,0 +1,15 @@
+{% extends "principal/base.html" %}
+
+{% block content %}
+
+<p><a href="{% url 'cliente' %}">{{ cliente }}</a></p>
+
+<p>Edição anotação:</p>
+
+<form action="{% url 'edit_cliente' client.id %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button name="submit">enviar</button>
+</form>
+
+{% endblock content %}

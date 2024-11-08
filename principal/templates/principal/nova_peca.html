@@ -1,0 +1,12 @@
+{% extends "principal/base.html" %}
+
+{% block content %}
+
+<form action="{% url 'nova_peca' %}" method="post">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Adicionar</button>
+</form>
+
+{% endblock content %}

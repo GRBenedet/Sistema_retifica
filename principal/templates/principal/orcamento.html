@@ -1,3 +1,4 @@
+
 {% extends "principal/base.html" %}
 
 
@@ -5,11 +6,19 @@
 
 <ul>
 
-    {% for orcamento in orc %}
-        <li>{{ orcamento }}</li>
+    {% for orc in orcamento %}
+        <li>
+            {{ orc.cliente }}
+            {{ orc.preco_final }}
+            {{ orc.data | date:"d/m/Y" }}
+            <a href="{% url 'edit_orcamento' orc.id %}">editar cliente</a> 
+            <a href="{% url 'del_orcamento' orc.id %}">Excluir</a>    
+        </li>
     {% empty %}
         <li>Não a dados salvos</li>
     {% endfor %}
 </ul>
+
+<a href="{% url 'novo_orc' %}">novo oçamento</a>
 
 {% endblock content %}

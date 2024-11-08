@@ -3,15 +3,15 @@ from django.db import models
 class clientes(models.Model):
     """Lista de clientes"""
     nome = models.CharField(max_length=30)
-    cpfcnpj = models.IntegerField()
+    cpfcnpj = models.BigIntegerField()
     end = models.CharField(max_length=100)
-    tel = models.IntegerField()
+    tel = models.BigIntegerField()
     obs = models.CharField(max_length=200, blank=True, null=True)
     data_cadastro = models.DateTimeField(auto_now_add=True)
 
     def __str__ (self):
         """devolve uma representação do modelo"""
-        return self.nome
+        return str(self.nome)
     
 class motor(models.Model):
     nomemotor = models.CharField(max_length=50)
@@ -26,10 +26,10 @@ class motor(models.Model):
     
 class pecas(models.Model):
     """lista de peças"""
-    cod = models.IntegerField()
+    cod = models.BigIntegerField()
     nome = models.CharField(max_length=30)
     med = models.CharField(max_length=10, blank=True, null=True)
-    aplic = models.ForeignKey(motor, on_delete=models.PROTECT)
+    aplic = models.ManyToManyField(motor)
     custo = models.FloatField(blank=True, null=True)
     valor = models.FloatField()
     data = models.DateTimeField(auto_now_add=True)
@@ -40,7 +40,7 @@ class pecas(models.Model):
     
 class servicos(models.Model):
     """lista de serviços"""
-    cod = models.IntegerField()
+    cod = models.BigIntegerField()
     nome = models.CharField(max_length=20)
     valor = models.FloatField()
     obs = models.CharField(max_length=200, blank=True, null=True)
@@ -51,15 +51,15 @@ class servicos(models.Model):
 
 class orcamentos(models.Model):
     """lista de orçamentos ativos"""
-    cliente = models.ForeignKey(clientes, on_delete=models.PROTECT)
-    buy_pecas = models.ForeignKey(pecas, on_delete=models.PROTECT, blank=True, null=True)
-    ativos_servicos = models.ForeignKey(servicos, on_delete=models.PROTECT, blank=True, null=True)
+    cliente = models.ForeignKey(clientes, on_delete=models.CASCADE)
+    buy_pecas = models.ManyToManyField(pecas, blank=True, null=True)
+    ativos_servicos = models.ManyToManyField(servicos, blank=True, null=True)
     preco_final = models.FloatField()
     data = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         """retorna modelo para orçamentos"""
-        return self.cliente
+        return self.id
 
 class orcamentos_end(models.Model):
     """lista de orçamentos finalizados"""
@@ -73,9 +73,9 @@ class orcamentos_end(models.Model):
     
 class notas(models.Model):
     """tabela de notas dadas entrada"""
-    cod = models.IntegerField()
+    cod = models.BigIntegerField()
     dist = models.CharField(max_length=30)
-    prod = models.ForeignKey(pecas, on_delete=models.PROTECT)
+    prod = models.ManyToManyField(pecas)
     quant = models.IntegerField()
     custo = models.FloatField()
     custototal = models.FloatField(blank=True, null=True)

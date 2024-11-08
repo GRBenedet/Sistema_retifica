@@ -6,10 +6,15 @@
 <ul>
 
     {% for cliente in cliente %}
-        <li>{{ cliente }} {{ cliente.cpfcnpj }} {{ cliente.tel }} {{ cliente.data_cadastro | date:"d/m/Y" }}</li>
+        <li>{{ cliente }} {{ cliente.cpfcnpj }} {{ cliente.tel }} {{ cliente.data_cadastro | date:"d/m/Y" }}
+            <a href="{% url 'edit_cliente' cliente.id %}">editar cliente</a>
+            <a href="{% url 'del_cliente' cliente.id %}">Excluir</a>
+        </li>
     {% empty %}
         <li>Não a dados salvos</li>
     {% endfor %}
 </ul>
+
+<a href="{% url 'novo_cliente' %}">Cadastrar novo cliente</a>
 
 {% endblock content %}

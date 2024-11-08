@@ -1,0 +1,15 @@
+{% extends "principal/base.html" %}
+
+{% block content %}
+
+<p><a href="{% url 'orcamentos' %}">{{ orcamento }}</a></p> 
+
+<p>Edição anotação:</p>
+
+<form action="{% url 'edit_orcamento' orc.id %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button name="submit">enviar</button>
+</form>
+
+{% endblock content %}

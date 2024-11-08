@@ -1,0 +1,12 @@
+{% extends "principal/base.html" %}
+
+{% block content %}
+<h2>Tem certeza de que deseja excluir o produto "{{ mot.nomemotor }}"?</h2>  
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, excluir</button>
+    <a href="{% url 'motores' %}">Cancelar</a>
+
+</form>
+{% endblock content %}

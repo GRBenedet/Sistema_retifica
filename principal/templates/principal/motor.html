@@ -1,0 +1,21 @@
+{% extends "principal/base.html" %}
+
+
+{% block content %}
+
+<ul>
+
+    {% for motor in motores %}
+        <li>
+            {{ motor }} 
+            <a href="{% url 'edit_motor' motor.id %}">editar motor</a>
+            <a href="{% url 'del_motor' motor.id %}">Excluir</a>   
+        </li>
+    {% empty %}
+        <li>Não a dados salvos</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'novo_motor' %}">Cadastrar novo motor</a>
+
+{% endblock content %}

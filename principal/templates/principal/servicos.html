@@ -5,11 +5,17 @@
 
 <ul>
 
-    {% for servico in serv %}
-        <li>{{ peca }}</li>
+    {% for serv in servico %}
+        <li>
+            {{ serv }}
+            <a href="{% url 'edit_servico' serv.id %}">editar serviço</a>
+            <a href="{% url 'del_servico' serv.id %}">Excluir</a> 
+        </li>
     {% empty %}
         <li>Não a dados salvos</li>
     {% endfor %}
 </ul>
+
+<a href="{% url 'novo_servico' %}">Cadastrar novo serviço</a>
 
 {% endblock content %}
